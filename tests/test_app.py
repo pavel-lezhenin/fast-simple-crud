@@ -117,7 +117,7 @@ class TestSSE:
     @pytest.mark.asyncio
     async def test_event_generator(self) -> None:
         """Test event generator yields correct format."""
-        from fast_simple_crud.app import event_generator  # noqa: PLC0415
+        from fast_simple_crud.app import event_generator
 
         gen = event_generator()
         event = await gen.__anext__()
@@ -129,7 +129,7 @@ class TestSSE:
     async def test_event_generator_multiple_events(self) -> None:
         """Test event generator yields multiple events."""
         with patch("fast_simple_crud.app.asyncio.sleep", return_value=None):
-            from fast_simple_crud.app import event_generator  # noqa: PLC0415
+            from fast_simple_crud.app import event_generator
 
             gen = event_generator()
             event1 = await gen.__anext__()
@@ -141,9 +141,9 @@ class TestSSE:
     @pytest.mark.asyncio
     async def test_sse_stream_returns_event_source_response(self) -> None:
         """Test sse_stream returns EventSourceResponse."""
-        from sse_starlette.sse import EventSourceResponse  # noqa: PLC0415
+        from sse_starlette.sse import EventSourceResponse
 
-        from fast_simple_crud.app import sse_stream  # noqa: PLC0415
+        from fast_simple_crud.app import sse_stream
 
         response = await sse_stream()
         assert isinstance(response, EventSourceResponse)
@@ -155,9 +155,9 @@ class TestBroadcast:
     @pytest.mark.asyncio
     async def test_broadcast_to_clients(self) -> None:
         """Test broadcast sends to all connected clients."""
-        from unittest.mock import AsyncMock  # noqa: PLC0415
+        from unittest.mock import AsyncMock
 
-        from fast_simple_crud.app import broadcast, websocket_clients  # noqa: PLC0415
+        from fast_simple_crud.app import broadcast, websocket_clients
 
         mock_client = AsyncMock()
         websocket_clients.append(mock_client)
@@ -170,9 +170,9 @@ class TestBroadcast:
     @pytest.mark.asyncio
     async def test_broadcast_handles_error(self) -> None:
         """Test broadcast handles client errors gracefully."""
-        from unittest.mock import AsyncMock  # noqa: PLC0415
+        from unittest.mock import AsyncMock
 
-        from fast_simple_crud.app import broadcast, websocket_clients  # noqa: PLC0415
+        from fast_simple_crud.app import broadcast, websocket_clients
 
         mock_client = AsyncMock()
         mock_client.send_json.side_effect = Exception("Connection lost")
@@ -187,9 +187,9 @@ class TestBroadcast:
     @pytest.mark.asyncio
     async def test_websocket_echo(self) -> None:
         """Test WebSocket echo functionality."""
-        from starlette.testclient import TestClient  # noqa: PLC0415
+        from starlette.testclient import TestClient
 
-        from fast_simple_crud.app import app  # noqa: PLC0415
+        from fast_simple_crud.app import app
 
         with TestClient(app) as sync_client, sync_client.websocket_connect("/ws") as ws:
             ws.send_json({"event": "message", "data": "hello"})
@@ -204,7 +204,7 @@ class TestMain:
     def test_main_function(self) -> None:
         """Test main entry point."""
         with patch("uvicorn.run") as mock_run:
-            from fast_simple_crud.__main__ import main  # noqa: PLC0415
+            from fast_simple_crud.__main__ import main
 
             main()
             mock_run.assert_called_once()
@@ -212,6 +212,6 @@ class TestMain:
     def test_main_block(self) -> None:
         """Test __main__ block execution."""
         with patch("uvicorn.run"):
-            import runpy  # noqa: PLC0415
+            import runpy
 
             runpy.run_module("fast_simple_crud", run_name="__main__")
