@@ -182,6 +182,7 @@ class TestBroadcast:
             await broadcast("test message")
         finally:
             websocket_clients.remove(mock_client)
+
     """Tests for WebSocket endpoint."""
 
     @pytest.mark.asyncio
