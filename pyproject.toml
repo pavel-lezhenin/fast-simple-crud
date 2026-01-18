@@ -7,12 +7,11 @@ name = "fast-simple-crud"
 version = "0.1.0"
 description = "FastAPI demo: REST CRUD, SSE, WebSocket"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.14"
 license = "MIT"
 authors = [{ name = "Your Name", email = "your@email.com" }]
 classifiers = [
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.14",
     "Typing :: Typed",
 ]
 
@@ -42,7 +41,7 @@ packages = ["src/fast_simple_crud"]
 # RUFF
 # ==================================================
 [tool.ruff]
-target-version = "py311"
+target-version = "py314"
 line-length = 88
 
 [tool.ruff.format]
