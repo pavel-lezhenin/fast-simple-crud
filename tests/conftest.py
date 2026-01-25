@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 @pytest.fixture
-async def client() -> AsyncGenerator[AsyncClient, None]:
+async def client() -> AsyncGenerator[AsyncClient]:
     """Async test client for FastAPI."""
     async with AsyncClient(
         transport=ASGITransport(app=app),

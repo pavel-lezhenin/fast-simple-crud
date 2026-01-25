@@ -115,7 +115,7 @@ async def delete_item(item_id: int) -> None:
 # =============================================================================
 
 
-async def event_generator() -> AsyncGenerator[dict[str, str], None]:
+async def event_generator() -> AsyncGenerator[dict[str, str]]:
     """Generate SSE events every second."""
     while True:
         now = datetime.now(tz=UTC).isoformat()
